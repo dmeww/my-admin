@@ -4,9 +4,11 @@ import getRoutesByRole from "@/router/routes/index.js";
 import Router from "@/router/index.js";
 
 function addRoutes(router, routes) {
-    console.log(`获取的路由`, routes)
+    console.log(`准备添加路由`, router.getRoutes())
     routes.forEach(route => {
+        // console.log('添加路由中：',route)
         router.addRoute(route)
+        // console.log('添加路由完成：',router.getRoutes())
     })
 }
 
@@ -15,15 +17,13 @@ export function resetRouter(router) {
     // 清空路由表
     router.getRoutes().forEach(route => {
         const {name} = route
-        if (name) {
-            router.hasRoute(name) && router.removeRoute(name)
-        }
+        router.hasRoute(name) && router.removeRoute(name)
     })
     // 重新添加默认路由
     defaultRoutes.forEach((route) => {
         router.addRoute(route)
     })
-
+    console.log('重置路由完成', router.getRoutes())
 }
 
 

@@ -27,3 +27,4 @@ export function filterMenuFromRoutes(routes = [], parentPath = '/') {
     }
     return result
 }
+

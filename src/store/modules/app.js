@@ -9,6 +9,9 @@ export const useAppStore = defineStore('app', {
             defaultSelectedMenuItem: '',    // 默认选中的菜单项
             list: []                        // 菜单列表
         },
+        navbar: {
+          breadcrumb: [{title: '控制台', url: '/'},{title: '首页', url: '/'}]  // 默认面包屑
+        },
         router: {
             init: false                     // 路由状态
         },
@@ -16,9 +19,6 @@ export const useAppStore = defineStore('app', {
     }),
     getters: {},
     actions: {
-        collapseSideMenu(status) {
-            this.sideMenu.collapsed = status
-        },
         loadRoleMenu(routes) {
             this.sideMenu.list = filterMenuFromRoutes(routes)
             console.log('生成菜单 ', this.sideMenu.list)

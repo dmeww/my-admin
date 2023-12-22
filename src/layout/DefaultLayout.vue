@@ -7,10 +7,10 @@
     </div>
 
     <div class="content">
-      <Navbar/>
-      <div class="page">
+      <Navbar />
+      <el-scrollbar class="page">
         <router-view/>
-      </div>
+      </el-scrollbar>
     </div>
   </div>
 </template>
@@ -20,6 +20,8 @@ import Navbar from "@/layout/component/Navbar.vue";
 import SideMenu from "@/layout/component/SideMenu.vue";
 
 
+
+
 </script>
 
 <style lang="less" scoped>
@@ -27,20 +29,20 @@ import SideMenu from "@/layout/component/SideMenu.vue";
 
 
 .container {
-  height: calc(100% - @nav-height);
+  height: 100%;
   display: flex;
 }
 
 .sider {
-  min-width: 220px;
-  //width: 200px;
+  min-width: 210px;
   border-right: solid 1px var(--el-menu-border-color);
   background-color: #001529;
 }
 
 .content {
   width: 100%;
-  .page{
+  height: calc(100% - @nav-height);
+  .page {
     background-color: @content-bg-color;
   }
 }

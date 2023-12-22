@@ -9,7 +9,6 @@ import {ROLES} from "@/utils/static.js";
 export default function loadRoleRoutesGuard(router) {
 
     router.beforeEach((to, from, next) => {
-        console.log('Enter Guard')
         const appStore = useAppStore()
         const userStore = useUserStore()
 
@@ -31,7 +30,8 @@ export default function loadRoleRoutesGuard(router) {
                     return
                 }
                 // 判断目标地址在不在路由表中，不在就重定向到404
-                let hasRoute = router.getRoutes().filter(route => route.path === to.path).length
+                const targetUrl = to.path.endsWith('/') ? to.path.slice(0, -1) : `${to.path}`
+                let hasRoute = router.getRoutes().filter(route => route.path === targetUrl).length
                 if (hasRoute) {
                     // 权限检查部分
                     // 不设置页面权限默认无法访问
@@ -44,6 +44,7 @@ export default function loadRoleRoutesGuard(router) {
                         next(from.path)
                     }
                 } else {
+                    console.log('404路由',to.path)
                     next('/404')
                 }
             }

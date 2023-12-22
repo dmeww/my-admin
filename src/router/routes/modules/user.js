@@ -53,6 +53,7 @@ export const userRoutes = [
     {
         path: '/',
         redirect: '/user',
+        name:'redirect',
         meta: {
             roles: ['user'],
             hidden: true

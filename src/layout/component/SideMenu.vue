@@ -1,13 +1,14 @@
 <template>
-  <div class="top" >
+
+  <div class="top">
     <img src="@/assets/logo.svg" alt="logo" class="logo">
-    <div class="title">
+    <span class="title">
       在线会议管理系统
-    </div>
+    </span>
   </div>
-  <el-scrollbar style="background-color: #001529;">
+  <el-scrollbar style="height: calc(100% - 48px); background-color: #001529;">
     <el-menu
-        default-active="2"
+        :default-active="activeMenuItem"
         background-color="#001529"
         text-color="#A5ADB4"
         active-text-color="#FFFFFF"
@@ -38,19 +39,27 @@
       </div>
 
     </el-menu>
+
+
   </el-scrollbar>
+
 </template>
 
 <script setup>
-import {Document, Location, Setting} from "@element-plus/icons-vue";
-import {ElNotification} from "element-plus";
+import { Location} from "@element-plus/icons-vue";
 import router from "@/router/index.js";
 import {useAppStore} from "@/store/index.js";
 import {computed} from "vue";
+import {useRoute} from "vue-router";
+
+const route = useRoute()
 
 const appStore = useAppStore()
 
 const menu = computed(() => appStore.sideMenu.list)
+const activeMenuItem = computed(() => route.path)
+
+
 
 function handleOpen(targetUrl) {
   console.log("你点击了", targetUrl)
@@ -66,7 +75,6 @@ function handleOpen(targetUrl) {
 .menu {
   height: 100%;
   border-right: none;
-
 }
 
 .top {
@@ -74,15 +82,17 @@ function handleOpen(targetUrl) {
   align-items: center;
   justify-content: center;
   height: @nav-height;
-  background-color: rgb(0,33,64);
+  background-color: rgb(0, 33, 64);
   color: white;
+
   .logo {
-    height: calc(@nav-height - 25px);
+    height: 32px;
   }
-  .title{
+
+  .title {
     font-size: 18px;
     font-weight: normal;
-    padding-left: 5px;
+    padding-left: 12px;
   }
 }
 
